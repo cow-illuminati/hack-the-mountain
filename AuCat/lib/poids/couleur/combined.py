@@ -82,7 +82,9 @@ def hue_centre_valeur(path, samples=10):
         
     for val in vals_moy:
         val_moy += val / len(vals_moy)
-
+    
+    video.release()
+    
     return hue_moy, hue_c_moy, val_moy
         
     

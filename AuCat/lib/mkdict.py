@@ -4,7 +4,11 @@
 
 import poids.couleur.combined as poids
 import numpy as np
+import poids.metadata.fps as fps
+import poids.metadata.res as res
 import os
+import pickle
+
 
 # Retourne le vecteur pour une vidéo
 def cat_vid(path, sample=10):
@@ -14,9 +18,13 @@ def cat_vid(path, sample=10):
 
     vect.append(val)
 
+
     # Les hues doivent êtres considérés sur un cercle! 
     vect.append(np.exp(hue/256*2*np.pi*1j))
     vect.append(np.exp(hue_c/256*2*np.pi*1j))
+
+    vect.append(fps.fps(path))
+    vect.append(res.res(path))
 
     return vect
 
@@ -38,7 +46,7 @@ def parse_vid(path, samples=10):
 
         # C'est un clip (et non .. ou .)
         if clip.is_file():
-            print(clip.name + (" " * 10), end="")
+            print(clip.name + (" " * 16), end="")
             cedict[os.path.abspath(clip)] = cat_vid(os.path.abspath(clip),samples)
 
         index += 1
@@ -47,5 +55,9 @@ def parse_vid(path, samples=10):
     
     for key, value in cedict.items():
         print(f"{key}: {value}")
-    
+
+    # Dumps to file for debugging
+    with open('_last.dump', 'wb') as file:
+        pickle.dump(cedict, file)
+
     return cedict
