@@ -15,7 +15,7 @@ AuCat : parent\
 			| - metadata\
 				| - fps.py : fps de la vidéo (ou slow-mo / timelapse)
 				| - res.py : résolution
-		| - poids.py : retourne un dict avec chaque vidéo associé à un vecteur de poids, normalisés 
+		| - mkdict : retourne un dict avec chaque vidéo associé à un vecteur de poids, normalisés 
 		| - distance.py : done la distance entre deux éléments 
 		| - isles.py : identifie les îles
 		| - recat.py : réorganise les vidéos
