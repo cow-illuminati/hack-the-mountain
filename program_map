@@ -1,5 +1,24 @@
-0) Organisation, interface pour accepter les vidéos
-1) Catégorisation : Prends chaque vidéo et associe un hash
-2) Réorganisation : insère les hash dans un espace en haute dimension, avec des poids
-3) Algorithme d'alvéole pour trouver les îles?
-4) Utilise les îles pour créer des dossiers, renommer les clips, et le insérer 
+
+AuCat : parent\
+	| - bin : exécutables d'utilisateur
+		| - prompt.py : interface graphique
+		| - run.py : démarre le programme, installe les libs
+		| - run.bat : wrapper Windows
+	| - lib : exécutables d'outils\
+			| - audio\
+				| - amplitude.py : Amplitude de l'audio
+				| - cadence.py : Cadence de l'audio
+			| - couleur\
+				| - hue.py : teinte de la vidéo
+				| - hue_centre.py : teinte du sujet (centre)
+				| - valeur : noiceur de la vidéo
+			| - metadata\
+				| - fps.py : fps de la vidéo (ou slow-mo / timelapse)
+				| - res.py : résolution
+		| - poids.py : retourne un dict avec chaque vidéo associé à un vecteur de poids, normalisés 
+		| - distance.py : done la distance entre deux éléments 
+		| - isles.py : identifie les îles
+		| - recat.py : réorganise les vidéos
+
+	| - src : pêle-mêle\
+
