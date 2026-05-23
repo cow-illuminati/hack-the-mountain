@@ -1,5 +1,5 @@
-
-# Accepte un fichier et retourne le dB du son (médiane, excluant les vides)
+# Accepte un fichier et retourne le niveau sonore en échelle linéaire
+# (médiane, excluant les segments silencieux)
 #
 # Dépendances Python à installer :
 #   pip install pydub numpy
@@ -33,7 +33,7 @@ def get_nonsilent_audio(audio, silence_thresh=-10, min_silence_len=100):
     )
 
     if not nonsilent_ranges:
-        raise ValueError("Aucun segment non silencieux trouvé.")
+        return AudioSegment.empty()
 
     result = AudioSegment.empty()
 
@@ -43,8 +43,12 @@ def get_nonsilent_audio(audio, silence_thresh=-10, min_silence_len=100):
     return result
 
 
-def median_dbfs(audio, chunk_ms=50):
-    values = []
+def dbfs_to_linear(dbfs_value):
+    return float(10 ** (dbfs_value / 20.0))
+
+
+def median_linear_level(audio, chunk_ms=50):
+    values_linear = []
 
     for start in range(0, len(audio), chunk_ms):
         chunk = audio[start:start + chunk_ms]
@@ -55,15 +59,15 @@ def median_dbfs(audio, chunk_ms=50):
         if chunk.rms == 0:
             continue
 
-        values.append(chunk.dBFS)
+        values_linear.append(dbfs_to_linear(chunk.dBFS))
 
-    if not values:
-        raise ValueError("Aucune valeur de dBFS exploitable trouvée.")
+    if not values_linear:
+        return 0.0
 
-    return float(np.median(values))
+    return float(np.median(values_linear))
 
 
-def median_db_excluding_silence(
+def median_level_excluding_silence(
     file_path,
     silence_thresh=-10,
     min_silence_len=100,
@@ -75,4 +79,4 @@ def median_db_excluding_silence(
         silence_thresh=silence_thresh,
         min_silence_len=min_silence_len
     )
-    return median_dbfs(cleaned_audio, chunk_ms=chunk_ms)
+    return median_linear_level(cleaned_audio, chunk_ms=chunk_ms)
