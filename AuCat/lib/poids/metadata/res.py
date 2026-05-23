@@ -11,7 +11,4 @@ def res(path):
     
     video.release()
 
-    if (width < height):
-        width = -width
-
     return width/height

@@ -7,7 +7,7 @@ import numpy as np
 
 
 # Accepte un fichier et retourne le hue
-def hue_centre_valeur(path, samples=10):
+def hue_centre_valeur_sat(path, samples=10):
 
     # Charge la vidéo
     video = cv2.VideoCapture(path, cv2.CAP_FFMPEG, [
@@ -45,7 +45,9 @@ def hue_centre_valeur(path, samples=10):
     hues_moy = []
     hues_c_moy = []
     vals_moy = []
- 
+    sats_moy = []
+
+
     # Crop
 
     height, width, _ = images[0].shape
@@ -70,9 +72,14 @@ def hue_centre_valeur(path, samples=10):
         vals = hsv[:, :, 2]
         vals_moy.append(np.mean(vals))
 
+        sats = hsv[:, :, 1]
+        sats_moy.append(np.mean(sats))
+
+
 
     hue_moy = 0
     val_moy = 0
+    sat_moy = 0
     hue_c_moy = 0
     for hue in hues_moy:
         hue_moy += hue / len(hues_moy)
@@ -82,9 +89,12 @@ def hue_centre_valeur(path, samples=10):
         
     for val in vals_moy:
         val_moy += val / len(vals_moy)
+ 
+    for sat in sats_moy:
+        sat_moy += sat / len(sats_moy)
     
     video.release()
     
-    return hue_moy, hue_c_moy, val_moy
+    return hue_moy, hue_c_moy, val_moy, sat_moy
         
     

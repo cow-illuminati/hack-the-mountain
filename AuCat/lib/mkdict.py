@@ -1,6 +1,5 @@
 
 #Passe les fichiers un-par-un aux poids, et crée une Dict avec
-#TODO
 
 import poids.couleur.combined as poids
 import numpy as np
@@ -14,17 +13,19 @@ import pickle
 def cat_vid(path, sample=10):
     vect = []
     
-    hue, hue_c, val = poids.hue_centre_valeur(path, sample)
+    hue, hue_c, val, sat = poids.hue_centre_valeur_sat(path, sample)
+   
+    vect.append(val/100)
 
-    vect.append(val)
-
+    vect.append(sat/75)
 
     # Les hues doivent êtres considérés sur un cercle! 
-    vect.append(np.exp(hue/256*2*np.pi*1j))
-    vect.append(np.exp(hue_c/256*2*np.pi*1j))
+    vect.append(np.exp(hue/256*2*np.pi*1j)*0.75)
+    vect.append(np.exp(hue_c/256*2*np.pi*1j)*2.5)
+    
 
-    vect.append(fps.fps(path))
-    vect.append(res.res(path))
+    vect.append(fps.fps(path)/30)
+    vect.append(res.res(path) - 1)
 
     return vect
 
