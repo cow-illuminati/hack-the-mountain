@@ -1,0 +1,5 @@
+0) Organisation, interface pour accepter les vidéos
+1) Catégorisation : Prends chaque vidéo et associe un hash
+2) Réorganisation : insère les hash dans un espace en haute dimension, avec des poids
+3) Algorithme d'alvéole pour trouver les îles?
+4) Utilise les îles pour créer des dossiers, renommer les clips, et le insérer 
