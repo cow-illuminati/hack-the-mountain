@@ -1,10 +1,20 @@
 
 # Accepte un fichier et retourne le dB du son (médiane, excluant les vides)
-# Dépendances à installer :
+#
+# Dépendances Python à installer :
 #   pip install pydub numpy
-# Aussi requis hors Python :
-#   FFmpeg doit être installé et disponible dans le PATH Windows
-#   (pydub en a besoin pour lire les fichiers mp4)
+#
+# Dépendance système requise :
+#   FFmpeg
+#
+# Installation FFmpeg :
+#   Windows : installer FFmpeg et l'ajouter au PATH
+#   Linux Ubuntu/Debian : sudo apt install ffmpeg
+#   Linux Fedora : sudo dnf install ffmpeg
+#   Linux Arch : sudo pacman -S ffmpeg
+#
+# Remarque :
+#   pydub utilise FFmpeg pour lire les fichiers mp4/mp3.
 
 from pydub import AudioSegment
 from pydub.silence import detect_nonsilent
