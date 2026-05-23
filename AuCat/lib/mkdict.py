@@ -15,22 +15,22 @@ def cat_vid(path, sample=10):
     
     hue, hue_c, val, sat = poids.hue_centre_valeur_sat(path, sample)
    
-    vect.append(val/100)
+    vect.append(val/100-1.28 - .5)
 
-    vect.append(sat/75)
+    vect.append(sat/75-1.7+.5)
 
     # Les hues doivent êtres considérés sur un cercle! 
     vect.append(np.exp(hue/256*2*np.pi*1j)*0.75)
     vect.append(np.exp(hue_c/256*2*np.pi*1j)*2.5)
     
 
-    vect.append(fps.fps(path)/30)
+    vect.append(fps.fps(path)/30-30)
     vect.append(res.res(path) - 1)
 
     return vect
 
 # Calcule chaque vidéo et assemble un dict
-def parse_vid(path, samples=10):
+def parse_vid(path, samples=15):
 
     cedict = {}
     

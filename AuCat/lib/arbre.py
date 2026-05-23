@@ -1,4 +1,3 @@
-
 import pickle
 import dist
 
@@ -17,11 +16,18 @@ def iles(latent):
     # Ordre de nom, pour le test
     for key, value in sorted(latent.items()):
         
-        if (dist.dist(value,lastval, 0) > 1.5 or dist.dist(value,lastval, 1) > .1 ):
+        if (not cluster(value, lastval)):
             print ("====================")
 
         print(key + " -> " + str(dist.dist(value,lastval, 0)) + " | " + str(dist.dist(value,lastval, 1)) + "   :   " + str(value))
         lastval=value
+
+
+def cluster(vA, vB):
+    if (dist.dist(vA,vB, 0) > 1 or dist.dist(vA,vB, 1) > .1 ):
+        return False
+    else:
+        return True
 
 
 iles({})
