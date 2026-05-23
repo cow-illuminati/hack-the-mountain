@@ -25,7 +25,7 @@ def load_audio(file_path):
     return AudioSegment.from_file(file_path)
 
 
-def get_nonsilent_audio(audio, silence_thresh=-10, min_silence_len=100):
+def get_nonsilent_audio(audio, silence_thresh=-30, min_silence_len=100):
     nonsilent_ranges = detect_nonsilent(
         audio,
         min_silence_len=min_silence_len,
@@ -69,7 +69,7 @@ def median_linear_level(audio, chunk_ms=50):
 
 def median_level_excluding_silence(
     file_path,
-    silence_thresh=-10,
+    silence_thresh=-30,
     min_silence_len=100,
     chunk_ms=50
 ):
