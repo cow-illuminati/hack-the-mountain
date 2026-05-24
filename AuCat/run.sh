@@ -1,2 +1,3 @@
 #!/bin/bash
-python 
+cd bin
+python run.py
