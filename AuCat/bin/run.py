@@ -1,3 +1,0 @@
-
-# Lance l'application
-# TODO
