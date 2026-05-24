@@ -30,7 +30,7 @@ def cat_vid(path, sample=10):
     return vect
 
 # Calcule chaque vidéo et assemble un dict
-def parse_vid(path, samples=15):
+def parse_vid(path, samples=30):
 
     cedict = {}
     
