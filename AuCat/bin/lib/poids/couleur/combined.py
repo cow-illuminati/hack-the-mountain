@@ -19,11 +19,15 @@ def hue_centre_valeur_sat(path, samples=10):
 
     # On veut n images, trouvons la longeur 
     length = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+
     n = int(length/samples)
 
     # Préparation
     images = []
     index = 0
+    
+    if (n == 0):
+        n = 1
 
     # Extraction
     while True:
