@@ -9,8 +9,3 @@ def aucat(path):
     isles = arbre.isles(ledict)
     recat.recat(isles)
     Path("_last.dump").unlink()
-
-aucat("/home/cow/Downloads/test")
-                
-            
- 
