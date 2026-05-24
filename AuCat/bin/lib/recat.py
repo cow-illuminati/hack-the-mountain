@@ -9,13 +9,13 @@ def pull_random_names(fichier, n):
         lines = f.readlines()
     return sorted(random.sample(lines, n))
     
-def recat(path, clusters, binpath):
+def recat(clusters):
 
-    noms = pull_random_names(Path("../src/noms"), len(clusters))
+    noms = pull_random_names(Path("src/noms"), len(clusters))
     index = 0
-    for isle in clusers:
-        for element in isle
+    for isle in clusters:
+        for element in isle:
             p = Path(element)
-            p.rename(p.with_name(f"{noms[index]}{p.stem}{p.suffix}"))
-            index += 1
+            p.rename(p.with_name(f"{noms[index].strip()}{p.stem}{p.suffix}"))
+        index += 1
 

@@ -1,10 +1,10 @@
 
 #Passe les fichiers un-par-un aux poids, et crée une Dict avec
-
-import poids.couleur.combined as poids
+from pathlib import Path
+import lib.poids.couleur.combined as poids
 import numpy as np
-import poids.metadata.fps as fps
-import poids.metadata.res as res
+import lib.poids.metadata.fps as fps
+import lib.poids.metadata.res as res
 import os
 import pickle
 
@@ -32,6 +32,9 @@ def cat_vid(path, sample=10):
 # Calcule chaque vidéo et assemble un dict
 def parse_vid(path, samples=30):
 
+    if (Path("_last.dump").exists()):
+        return None
+
     cedict = {}
     
     index = 0
@@ -43,11 +46,11 @@ def parse_vid(path, samples=30):
     # Pour chaque vidéo
     for clip in os.scandir(path):
         # Progrès
-        print("\r" + str(int(index/nb * 100)) + "% : ", end="")
+        print(str(int(index/nb * 100)) + "% : ", end="")
 
         # C'est un clip (et non .. ou .)
         if clip.is_file():
-            print(clip.name + (" " * 16), end="")
+            print(clip.name + (" " * 16))
             cedict[os.path.abspath(clip)] = cat_vid(os.path.abspath(clip),samples)
 
         index += 1
