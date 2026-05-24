@@ -1,4 +1,5 @@
 
+import cli as cli
 import os
 import tkinter as tk
 from tkinter import ttk, filedialog
@@ -22,7 +23,7 @@ class AutoCatApp(tk.Tk):
         self.minsize(900, 680)
         self.configure(bg=BG)
 
-        self.input_path = tk.StringVar(value="")
+        self.input_path = tk.StringVar(value="/home")
         self.output_path = tk.StringVar(value="")
         self.status_text = tk.StringVar(value="Ready.")
         self.progress_value = tk.DoubleVar(value=0)
@@ -330,12 +331,15 @@ class AutoCatApp(tk.Tk):
     def run_mock_job(self):
         self.progress_value.set(0)
         self.percent_label.config(text="0%")
-        self.status_text.set("Mock organize job running...")
+        self.status_text.set("Organize job running...")
         self._animate_progress(0)
 
     def _animate_progress(self, value):
         if value > 100:
-            self.status_text.set("Mock organize complete.")
+            self.status_text.set("Check logs for status...")
+            print ("working")
+            aucat(self.input_path.get())
+            # HERE ?? ^
             return
 
         self.progress_value.set(value)
