@@ -16,6 +16,6 @@ def recat(clusters):
     for isle in clusters:
         for element in isle:
             p = Path(element)
-            p.rename(p.with_name(f"{noms[index].strip()}{p.stem}{p.suffix}"))
+            p.rename(p.with_name(f"{noms[index].strip()}_{p.stem}{p.suffix}"))
         index += 1
 
