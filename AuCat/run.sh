@@ -1,3 +1,3 @@
 #!/bin/bash
 cd bin
-python run.py
+python prompt.py

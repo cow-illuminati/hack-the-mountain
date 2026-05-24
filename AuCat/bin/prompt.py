@@ -338,7 +338,7 @@ class AutoCatApp(tk.Tk):
         if value > 100:
             self.status_text.set("Check logs for status...")
             print ("working")
-            aucat(self.input_path.get())
+            cli.aucat(self.input_path.get())
             # HERE ?? ^
             return
 
